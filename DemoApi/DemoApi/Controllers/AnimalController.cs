@@ -16,10 +16,10 @@ namespace DemoApi.Controllers
             this.dogStore = dogStore;
         }
 
-        [HttpGet("Get")]
-        public Dog Get(int i) => dogStore.Get(i);
+        [HttpGet("{id}")]
+        public Dog Get(int id) => dogStore.Get(id);
 
-        [HttpGet("GetAll")]
+        [HttpGet]
         public List<Dog> GetAll() => dogStore.Get();
     }
 }

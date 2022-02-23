@@ -26,6 +26,15 @@ namespace DemoApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(
+                    p =>
+                    {
+                        //p.WithOrigins("http://localhost:4000");
+                        p.AllowAnyOrigin();
+                    });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -46,11 +55,13 @@ namespace DemoApi
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DemoApi v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
+
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {
